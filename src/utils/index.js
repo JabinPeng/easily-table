@@ -139,3 +139,31 @@ export function parseTime (time, cFormat) {
     })
     return time_str
 }
+
+/**
+ * 根据单位计算实际值
+ * params: '1vw' 屏幕宽
+ * **/
+export function formatSize(value) {
+    let size = parseFloat(value);
+    let { vh, vw } = getScreenUint();
+    if (typeof value === "string" && ~value.indexOf("vh")) {
+        return vh * size;
+    }
+    if (typeof value === "string" && ~value.indexOf("vw")) {
+        return vw * size;
+    }
+    return size;
+}
+/**
+ * 获取屏幕单位宽高
+ * **/
+export function getScreenUint() {
+    let { clientWidth, clientHeight } = document.documentElement;
+    let vh = clientHeight / 100;
+    let vw = clientWidth / 100;
+    return {
+        vh,
+        vw
+    };
+}

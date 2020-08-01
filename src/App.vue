@@ -1,18 +1,12 @@
 <template>
   <div id="app">
-    <h1>router-view</h1>
-    <el-button>默认按钮</el-button>
-<!--    <router-view></router-view>-->
   </div>
 </template>
 
 <script>
 import "@/reset.less";
 export default {
-  name: 'App',
-  mounted () {
-    this.$message.info('其他')
-  }
+  name: 'App'
 }
 </script>
 
