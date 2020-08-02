@@ -4,10 +4,11 @@ export const asyncRouterMap = []
 export const constRouterMap = [
     {
         path: '/',
-        name: 'Main',
-        component: () => import('@views/Main'),
+        name: 'main',
+        component: ()=>import('@views/main/index'),
         meta: { title: '首页' },
-        redirect: '/Main'
+
+
     }
 ]
 

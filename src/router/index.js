@@ -7,10 +7,9 @@ Router.prototype.push = function push (location) {
     return originalPush.call(this, location).catch(err => err)
 }
 Vue.use(Router)
-
 export default new Router({
     mode: 'hash',
-    base: process.env.BASE_URL,
+    // base: process.env.BASE_URL,
     scrollBehavior: () => ({ y: 0 }),
     routes: constRouterMap.concat(asyncRouterMap)
 })

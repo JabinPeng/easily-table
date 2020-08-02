@@ -6,6 +6,28 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <style>
+      /* 滚动条优化 start */
+      ::-webkit-scrollbar{
+        width:8px;
+        height:8px;
+      }
+      ::-webkit-scrollbar-track{
+        background: #f6f6f6;
+        border-radius:2px;
+      }
+      ::-webkit-scrollbar-thumb{
+        background: #cdcdcd;
+        border-radius:2px;
+      }
+      ::-webkit-scrollbar-thumb:hover{
+        background: #747474;
+      }
+      ::-webkit-scrollbar-corner {
+        background: #f6f6f6;
+      }
+      /* 滚动条优化 end */
+    </style>
   </head>
   <body>
     <noscript>

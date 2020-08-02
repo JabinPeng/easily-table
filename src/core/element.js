@@ -47,7 +47,7 @@ import {
     // Tree,
     // Alert,
     // Slider,
-    // Icon,
+    Icon,
     // Row,
     // Col,
     // Upload,
@@ -67,7 +67,7 @@ import {
     // Container,
     // Header,
     // Aside,
-    // Main,
+    // main,
     // Footer,
     Loading,
     MessageBox,
@@ -116,7 +116,7 @@ Vue.use(Button)
 // Vue.use(Tree)
 // Vue.use(Alert)
 // Vue.use(Slider)
-// Vue.use(Icon)
+Vue.use(Icon)
 // Vue.use(Row)
 // Vue.use(Col)
 // Vue.use(Upload)
@@ -135,7 +135,7 @@ Vue.use(Button)
 // Vue.use(Container)
 // Vue.use(Header)
 // Vue.use(Aside)
-// Vue.use(Main)
+// Vue.use(main)
 // Vue.use(Footer)
 Vue.use(Loading.directive)
 
