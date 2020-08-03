@@ -13,11 +13,11 @@
 
     .sketchpad {
       display: inline-block;
-      width: 960px;
+      width: 1200px;
       height: 1200px;
       position: absolute;
       left: 50%;
-      margin-left: -480px;
+      margin-left: -600px;
       margin-top: 100px;
       margin-bottom: 100px;
       z-index: 100;
@@ -70,6 +70,7 @@
             boxStyle[key] = positionVal + width + 'px'
           }
         })
+        console.log(boxStyle)
         return boxStyle
       }
     },
@@ -81,9 +82,9 @@
     },
     created () {
       const _t = this
-      // _t.$X.utils.bus.$on('editor/panel/toggle', function (data) {
-      //   _t.$set(_t.panelStyle, data.name, data.style)
-      // })
+      _t.$bus.$on('editor/panel/toggle', function (data) {
+        _t.$set(_t.panelStyle, data.name, data.style)
+      })
     }
   }
 </script>

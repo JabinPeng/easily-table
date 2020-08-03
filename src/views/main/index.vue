@@ -3,12 +3,14 @@
         <ToolBar :toolList="toolList"></ToolBar>
         <Sketchpad></Sketchpad>
         <PanelLeft :materialList="materialList"></PanelLeft>
+        <PanelRight></PanelRight>
     </div>
 </template>
 
 <script>
 import config from '@/assets/js/index'
 import PanelLeft from '@comp/containers/PanelLeft'
+import PanelRight from '@comp/containers/PanelRight'
 import ToolBar from '@comp/containers/ToolBar'
 import Sketchpad from '@comp/containers/Sketchpad'
 export default {
@@ -23,6 +25,7 @@ export default {
     },
     components: {
         PanelLeft,
+        PanelRight,
         ToolBar,
         Sketchpad
     }
