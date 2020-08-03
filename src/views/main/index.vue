@@ -1,22 +1,30 @@
 <template>
     <div class="LargeScreenVsualization">
+        <ToolBar :toolList="toolList"></ToolBar>
+        <Sketchpad></Sketchpad>
         <PanelLeft :materialList="materialList"></PanelLeft>
     </div>
 </template>
 
 <script>
-import PanelLeft from '@comp/containers/PanelLeft'
 import config from '@/assets/js/index'
+import PanelLeft from '@comp/containers/PanelLeft'
+import ToolBar from '@comp/containers/ToolBar'
+import Sketchpad from '@comp/containers/Sketchpad'
 export default {
     name: 'LargeScreenVsualization',
     data () {
        return {
            // 元素列表
            materialList: config.materials(),
+           // 工具列表
+           toolList: config.tools().toolList,
        }
     },
     components: {
-        PanelLeft
+        PanelLeft,
+        ToolBar,
+        Sketchpad
     }
 }
 </script>

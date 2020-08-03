@@ -3,7 +3,9 @@
  */
 
 import materials from './materials'
+import tools from './tools'
 
 export default {
-  materials
+  materials,
+  tools
 }
