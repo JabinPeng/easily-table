@@ -1,6 +1,12 @@
 # Large-screen-vsualization
 
 :fire:大屏可视化:fire:
+
+技术站：VUE + Element-ui
+
+功能介绍： 
+
+使用方法：
 ```
 npm install 
 ```
@@ -20,3 +26,6 @@ npm run build
 npm run lint
 ```
 
+特别鸣谢： vue-draggable-resizable-gorkys
+
+喜欢就给个star吧  ^_^
