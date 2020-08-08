@@ -1,7 +1,6 @@
 /**
  * 工具项配置
  */
-
 export default function (system = {}, disableTools = [], enableTools = [], shortcutMap = {}) {
   // 工具项快捷键列表
   shortcutMap = {
@@ -24,8 +23,8 @@ export default function (system = {}, disableTools = [], enableTools = [], short
     right: { tool: 'right', key: 'right', label: 'right', description: '' },
     ...shortcutMap
   }
-
   // 工具列表
+  console.log(system)
   let toolList = [
     {
       // 工具项名称，保持唯一性，便于区分工具项

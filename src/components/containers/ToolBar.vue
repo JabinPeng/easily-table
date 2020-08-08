@@ -66,6 +66,21 @@
     </Handler>
     <template v-for="(type, typeIndex) in Object.keys(toolMap)">
       <ToolBox mode="horizontal" :key="typeIndex" :class="type">
+        <template v-for="(item, index) in toolMap[type]">
+          <ToolItem
+                  v-if="item.type === 'link'"
+                  :key="'tool_' + type + '_item_' + index"
+                  :title="handleLabel(item)"
+                  :active="item.active"
+                  :disabled="item.disabled"
+                  :style="item.toolbar.style"
+                  @click.native="handleToolClick(item)"
+          >
+            <template v-slot:label>
+              <i :class="item.icon" :label="handleLabel(item)"></i>
+            </template>
+          </ToolItem>
+        </template>
       </ToolBox>
     </template>
   </div>
@@ -74,12 +89,14 @@
 <script>
   import Handler from '@comp/Handler'
   import ToolBox from '@comp/ToolBox/Index'
+  import ToolItem from '@comp/ToolBox/ToolItem'
 
   export default {
     name: 'ToolBar',
     components: {
       Handler,
-      ToolBox
+      ToolBox,
+      ToolItem
     },
     props: {
       editorData: Object,
@@ -140,7 +157,7 @@
           data: child.data,
           selected: val
         }
-        _t.$X.utils.bus.$emit('editor/tool/trigger', payload)
+        _t.$bus.$emit('editor/tool/trigger', payload)
       },
       handleToolClick (item, val) {
         const _t = this
@@ -182,7 +199,7 @@
     },
     created () {
       const _t = this
-      // _t.$X.utils.bus.$on('editor/pad/dblclick', _t.toggleHandler)
+      _t.$bus.$on('editor/pad/dblclick', _t.toggleHandler)
     }
   }
 </script>

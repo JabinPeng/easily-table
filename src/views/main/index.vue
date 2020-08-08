@@ -20,7 +20,7 @@ export default {
            // 元素列表
            materialList: config.materials(),
            // 工具列表
-           toolList: config.tools().toolList,
+           toolList: config.tools(config.system).toolList,
        }
     },
     components: {

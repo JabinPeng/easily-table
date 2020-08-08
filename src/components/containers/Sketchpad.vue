@@ -70,14 +70,13 @@
             boxStyle[key] = positionVal + width + 'px'
           }
         })
-        console.log(boxStyle)
         return boxStyle
       }
     },
     methods: {
       ondblclickPad () {
         const _t = this
-        _t.$X.utils.bus.$emit('editor/pad/dblclick')
+        _t.$bus.$emit('editor/pad/dblclick')
       }
     },
     created () {

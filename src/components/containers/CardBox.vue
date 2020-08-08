@@ -135,7 +135,7 @@
     },
     created () {
       const _t = this
-      // _t.$X.utils.bus.$on('editor/pad/dblclick', _t.toggleHandler)
+      _t.$bus.$on('editor/pad/dblclick', _t.toggleHandler)
     }
   }
 </script>
