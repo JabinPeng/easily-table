@@ -77,7 +77,7 @@
                   @click.native="handleToolClick(item)"
           >
             <template v-slot:label>
-              <i :class="item.icon" :label="handleLabel(item)"></i>
+              <img :src="item.img" alt="" style="width:40px;height:40px;">
             </template>
           </ToolItem>
         </template>
