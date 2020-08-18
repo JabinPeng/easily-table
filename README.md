@@ -1,5 +1,7 @@
 # Large-screen-vsualization
 
+![image](https://github.com/JabinPeng/warehouse/blob/master/images/logo.png)
+
 :fire:大屏可视化:fire:
 
 技术站：VUE + Element-ui
