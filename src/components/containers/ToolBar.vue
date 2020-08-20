@@ -67,17 +67,19 @@
     <template v-for="(type, typeIndex) in Object.keys(toolMap)">
       <ToolBox mode="horizontal" :key="typeIndex" :class="type">
         <template v-for="(item, index) in toolMap[type]">
-          <ToolItem
-                  v-if="item.type === 'link'"
-                  :key="'tool_' + type + '_item_' + index"
-                  :title="handleLabel(item)"
-                  :active="item.active"
-                  :disabled="item.disabled"
-                  :style="item.toolbar.style"
-                  @click.native="handleToolClick(item)"
+         <ToolItem
+            v-if="item.type === 'link'"
+            :key="'tool_' + type + '_item_' + index"
+            :title="handleLabel(item)"
+            :active="item.active"
+            :disabled="item.disabled"
+            :style="item.toolbar.style"
+            @click.native="handleToolClick(item)"
           >
             <template v-slot:label>
-              <img :src="item.img" alt="" style="width:40px;height:40px;">
+              <a class="link" :href="item.link" target="_blank" style="color: #333333;">
+                <img :src="item.img" :label="handleLabel(item)" style="width:40px;height:40px;" />
+              </a>
             </template>
           </ToolItem>
         </template>
@@ -186,7 +188,7 @@
             }
             break
         }
-        // _t.$X.utils.bus.$emit('editor/tool/trigger', payload)
+        _t.$bus.$emit('editor/tool/trigger', payload)
       },
       // 处理label
       handleLabel (item) {

@@ -24,7 +24,6 @@ export default function (system = {}, disableTools = [], enableTools = [], short
     ...shortcutMap
   }
   // 工具列表
-  console.log(system)
   let toolList = [
     {
       // 工具项名称，保持唯一性，便于区分工具项
