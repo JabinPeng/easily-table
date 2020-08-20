@@ -8,19 +8,20 @@
 </template>
 
 <script>
-import config from '@/assets/js/index'
+import tools from '@/core/tools'
 import PanelLeft from '@comp/containers/PanelLeft'
 import PanelRight from '@comp/containers/PanelRight'
 import ToolBar from '@comp/containers/ToolBar'
 import Sketchpad from '@comp/containers/Sketchpad'
+
 export default {
     name: 'LargeScreenVsualization',
     data () {
        return {
            // 元素列表
-           materialList: config.materials(),
+           materialList: [],
            // 工具列表
-           toolList: config.tools(config.system).toolList,
+           toolList: [],
        }
     },
     components: {
@@ -28,6 +29,10 @@ export default {
         PanelRight,
         ToolBar,
         Sketchpad
+    },
+    created () {
+        this.toolList = tools(this.$store.state.system).toolList
+        this.materialList = this.$store.state.material.defMaterials
     }
 }
 </script>
