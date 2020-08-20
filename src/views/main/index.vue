@@ -40,6 +40,5 @@ export default {
         user-select: none;
         overflow: hidden;
         background: #f8f9fa;
-        color:red;
     }
 </style>
