@@ -88,6 +88,7 @@
     methods: {
       handleMouseDown (event) {
         const _t = this
+        console.log('鼠标按下')
         _t.$bus.$emit('editor/add/node', _t.info)
       }
     }

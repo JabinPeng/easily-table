@@ -5,6 +5,7 @@ import bus from '@/utils/bus'
 import store from '@/store'
 import '@/core'
 
+
 Vue.config.productionTip = false
 Vue.use(bus)
 Vue.use(router)

@@ -31,8 +31,14 @@ export default {
         Sketchpad
     },
     created () {
-        this.toolList = tools(this.$store.state.system).toolList
-        this.materialList = this.$store.state.material.defMaterials
+       this.$nextTick(this.init)
+       this.$bus.$on('editor/add/node', _t.doAddNode)
+    },
+    methods: {
+        init () {
+           this.toolList = tools(this.$store.state.system).toolList
+           this.materialList = this.$store.state.material.defMaterials  
+        }
     }
 }
 </script>
