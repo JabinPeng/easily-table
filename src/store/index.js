@@ -3,24 +3,21 @@ import Vuex from 'vuex'
 
 import getters from './getters'
 
-import Model from './modules/model'
+import system from './modules/system'
+import material from './modules/material'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
     modules: {
-        Model
+      system,
+      material
     },
     state: {
-        rem:0
     },
     mutations: {
-        setRem(state,val){
-            state.rem = val
-        }
     },
     actions: {
-
     },
     getters
 })
