@@ -33,11 +33,76 @@
       display: none;
     }
   }
+  .test1 {
+    background-color: rgb(239, 154, 154);
+  }
+  .test2{
+    background-color: rgb(129, 212, 250);
+  }
+  .test3{
+    background-color: rgb(174, 213, 129);
+  }
 </style>
 
 <template>
   <div class="sketchpad-box" :style="boxStyle" @dblclick="ondblclickPad">
     <div class="sketchpad" id="sketchpad" @dblclick.stop>
+       <vdr
+        :w="200"
+        :h="200"
+        :parent="true"
+        :debug="false"
+        :min-width="200"
+        :min-height="200"
+        :isConflictCheck="true"
+        :snap="true"
+        :snapTolerance="10"
+        @refLineParams="getRefLineParams"
+        class="test1">
+      </vdr>
+      <vdr
+        :w="200"
+        :h="200"
+        :parent="true"
+        :x="210"
+        :debug="false"
+        :min-width="200"
+        :min-height="200"
+        :isConflictCheck="true"
+        :snap="true"
+        :snapTolerance="10"
+        @refLineParams="getRefLineParams"
+        class="test2">
+      </vdr>
+      <vdr
+        :w="200"
+        :h="200"
+        :parent="true"
+        :x="420"
+        :debug="false"
+        :min-width="200"
+        :min-height="200"
+        :isConflictCheck="true"
+        :snap="true"
+        :snapTolerance="10"
+        @refLineParams="getRefLineParams"
+        class="test3">
+      </vdr>
+
+       <!--辅助线-->
+      <span class="ref-line v-line"
+            v-for="item in vLine"
+            :key="item.id"
+            v-show="item.display"
+            :style="{ left: item.position, top: item.origin, height: item.lineLength}"
+      />
+      <span class="ref-line h-line"
+            v-for="item in hLine"
+            :key="item.id"
+            v-show="item.display"
+            :style="{ top: item.position, left: item.origin, width: item.lineLength}"
+      />
+
       <!-- 文本输入框 -->
       <input class="inputBox" autofocus value="">
     </div>
@@ -53,7 +118,9 @@
         panelStyle: {
           left: null,
           right: null
-        }
+        },
+        vLine: [],
+        hLine: []
       }
     },
     computed: {
@@ -77,7 +144,20 @@
       ondblclickPad () {
         const _t = this
         _t.$bus.$emit('editor/pad/dblclick')
-      }
+      },
+       // 辅助线回调事件
+    getRefLineParams (params) {
+      const { vLine, hLine } = params
+      let id = 0
+      this.vLine = vLine.map(item => {
+        item['id'] = ++id
+        return item
+      })
+      this.hLine = hLine.map(item => {
+        item['id'] = ++id
+        return item
+      })
+    }
     },
     created () {
       const _t = this
