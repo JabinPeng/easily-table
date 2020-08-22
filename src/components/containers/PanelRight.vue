@@ -25,37 +25,8 @@
 <script>
 import CardBox from "@comp/containers/CardBox";
 import ConfigItem from "@comp/ConfigItem/Index";
-
-let materialConfig = [
-  {
-    label: "样式",
-    properties: [
-      {
-        type: "color",
-        name: "填充",
-        value: "",
-      },
-      {
-        type: "border",
-        name: "线条",
-        value: "",
-      },
-      {
-        type: "opacity",
-        name: "不透明度",
-        value: "",
-      },
-    ],
-  },
-  {
-    label: "文本",
-    properties: {},
-  },
-  {
-    label: "调整图形",
-    properties: {},
-  },
-];
+import config from "@/config/material";
+console.log(config)
 
 export default {
   name: "PanelRight",
@@ -71,8 +42,7 @@ export default {
   computed: {},
   data() {
     return {
-      radio1: "上海",
-      materialConfig,
+      materialConfig: config.DOM,
     };
   },
   watch: {
