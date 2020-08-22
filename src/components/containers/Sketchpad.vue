@@ -22,12 +22,12 @@
       margin-bottom: 100px;
       z-index: 100;
       background: #ffffff;
-      background-image: linear-gradient(#f4f4f4 2px,transparent 0),
-      linear-gradient(90deg, #f4f4f4 2px,transparent 0),
-      linear-gradient(hsla(0,0%,100%,.3) 1px,transparent 0),
-      linear-gradient(90deg,hsla(0,0%,100%,.3) 1px,transparent 0);
-      background-size:20px 20px,20px 20px,15px 15px,15px 15px;
-      box-shadow: 0 0 2px 2px rgba(0, 0, 0, .1);
+      background-image: linear-gradient(#f4f4f4 1px,transparent 0),
+      linear-gradient(90deg, #f4f4f4 1px,transparent 0),
+      linear-gradient(hsla(0,0%,100%,.5) 1px,transparent 0),
+      linear-gradient(90deg,hsla(0,0%,100%,.5) 1px,transparent 0);
+      background-size:20px 20px,20px 20px,20px 20px,20px 20px;
+      box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1);
     }
     .inputBox {
       display: none;
@@ -56,7 +56,7 @@
         :min-height="200"
         :isConflictCheck="true"
         :snap="true"
-        :snapTolerance="10"
+        :grid="[20,20]" 
         @refLineParams="getRefLineParams"
         class="test1">
       </vdr>
@@ -70,7 +70,7 @@
         :min-height="200"
         :isConflictCheck="true"
         :snap="true"
-        :snapTolerance="10"
+        :grid="[20,20]" 
         @refLineParams="getRefLineParams"
         class="test2">
       </vdr>
@@ -84,7 +84,7 @@
         :min-height="200"
         :isConflictCheck="true"
         :snap="true"
-        :snapTolerance="10"
+        :grid="[20,20]" 
         @refLineParams="getRefLineParams"
         class="test3">
       </vdr>
