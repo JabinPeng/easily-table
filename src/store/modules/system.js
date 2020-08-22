@@ -1,7 +1,7 @@
 const system = {
     state: {
         title: 'LSV',
-        logo: require('@/assets/logo.png'),
+        logo: require('@/assets/logo.svg'),
         github: 'https://github.com/JabinPeng/Large-screen-vsualization',
     },
     actions: {},

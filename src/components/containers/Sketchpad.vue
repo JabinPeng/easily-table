@@ -64,16 +64,16 @@
         :w="200"
         :h="200"
         :parent="true"
-        :x="210"
+        :x="200"
         :debug="false"
         :min-width="200"
         :min-height="200"
         :isConflictCheck="true"
         :snap="true"
-        :grid="[20,20]" 
         @refLineParams="getRefLineParams"
         class="test2">
       </vdr>
+
       <vdr
         :w="200"
         :h="200"
