@@ -1,6 +1,6 @@
 # Large-screen-vsualization
 
-![image](https://github.com/JabinPeng/warehouse/blob/master/images/logo.png)
+![image](http://lijiaw.com/assets/image/home.svg)
 
 :fire:大屏可视化:fire:
 
