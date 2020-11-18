@@ -56,10 +56,11 @@ export default {
 .color-picker {
   .color-block {
     display: block;
-    width: 4.8vw;
+    width: 6vw;
+    min-width: 100px;
     height: 2.5vh;
     cursor: pointer;
-    border-radius: 2px;
+    border-radius: 4px;
     border: 1px solid #dadce0;
   }
   .picker {
