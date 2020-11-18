@@ -31,13 +31,14 @@ export default {
         Sketchpad
     },
     created () {
+        const _t = this
        this.$nextTick(this.init)
        this.$bus.$on('editor/add/node', _t.doAddNode)
     },
     methods: {
         init () {
            this.toolList = tools(this.$store.state.system).toolList
-           this.materialList = this.$store.state.material.defMaterials  
+           this.materialList = this.$store.state.material.defMaterials
         }
     }
 }

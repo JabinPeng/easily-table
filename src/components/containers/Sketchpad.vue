@@ -10,7 +10,6 @@
     right: 0;
     top: 0;
     bottom: 0;
-
     .sketchpad {
       display: inline-block;
       width: 1200px;
@@ -22,12 +21,33 @@
       margin-bottom: 100px;
       z-index: 100;
       background: #ffffff;
-      background-image: linear-gradient(#f4f4f4 1px,transparent 0),
-      linear-gradient(90deg, #f4f4f4 1px,transparent 0),
-      linear-gradient(hsla(0,0%,100%,.5) 1px,transparent 0),
-      linear-gradient(90deg,hsla(0,0%,100%,.5) 1px,transparent 0);
-      background-size:20px 20px,20px 20px,20px 20px,20px 20px;
+      /*background-image: linear-gradient(#f4f4f4 1px,transparent 0),*/
+      /*linear-gradient(90deg, #f4f4f4 1px,transparent 0),*/
+      /*linear-gradient(hsla(0,0%,100%,.5) 1px,transparent 0),*/
+      /*linear-gradient(90deg,hsla(0,0%,100%,.5) 1px,transparent 0);*/
+      /*background-size:20px 20px,20px 20px,20px 20px,20px 20px;*/
       box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1);
+      /** 网格 **/
+      .drag-grid {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: linear-gradient(90deg, #f4f4f4 10%, rgba(0, 0, 0, 0) 10%),
+        linear-gradient(#f4f4f4 10%, rgba(0, 0, 0, 0) 10%);
+        background-size: 10px 10px;
+      }
+      .drag-large-grid {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: linear-gradient(90deg, #f4f4f4 1%, rgba(0, 0, 0, 0) 1%),
+        linear-gradient(#f4f4f4 1%, rgba(0, 0, 0, 0) 1%);
+        background-size: 100px 100px;
+      }
     }
     .inputBox {
       display: none;
@@ -46,7 +66,9 @@
 
 <template>
   <div class="sketchpad-box" :style="boxStyle" @dblclick="ondblclickPad">
-    <div class="sketchpad" id="sketchpad" @dblclick.stop>
+    <div class="sketchpad" id="sketchpad" @dblclick.stop @mousedown="setShowGrid">
+      <div class="drag-grid" v-show="showGrid"></div>
+      <div class="drag-large-grid" v-show="showGrid"></div>
        <vdr
         :w="200"
         :h="200"
@@ -56,7 +78,7 @@
         :min-height="200"
         :isConflictCheck="true"
         :snap="true"
-        :grid="[20,20]" 
+        :grid="[10,10]"
         @refLineParams="getRefLineParams"
         class="test1">
       </vdr>
@@ -70,6 +92,7 @@
         :min-height="200"
         :isConflictCheck="true"
         :snap="true"
+        :grid="[10,10]"
         @refLineParams="getRefLineParams"
         class="test2">
       </vdr>
@@ -84,7 +107,7 @@
         :min-height="200"
         :isConflictCheck="true"
         :snap="true"
-        :grid="[20,20]" 
+        :grid="[10,10]"
         @refLineParams="getRefLineParams"
         class="test3">
       </vdr>
@@ -120,7 +143,8 @@
           right: null
         },
         vLine: [],
-        hLine: []
+        hLine: [],
+        showGrid: false
       }
     },
     computed: {
@@ -141,7 +165,12 @@
       }
     },
     methods: {
+      /** 网格 */
+      setShowGrid () {
+        this.showGrid = !this.showGrid
+      },
       ondblclickPad () {
+        console.log(this)
         const _t = this
         _t.$bus.$emit('editor/pad/dblclick')
       },
