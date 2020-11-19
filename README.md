@@ -29,6 +29,5 @@ npm run build
 npm run lint
 ```
 
-特别鸣谢： vue-draggable-resizable-gorkys
 
 喜欢就给个star吧  ^_^
