@@ -5,13 +5,15 @@ import getters from './getters'
 
 import system from './modules/system'
 import material from './modules/material'
+import canvas from './modules/canvas'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
     modules: {
       system,
-      material
+      material,
+      canvas
     },
     state: {
     },

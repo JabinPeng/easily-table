@@ -109,6 +109,7 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
   export default {
     name: 'Sketchpad',
     data () {
@@ -120,15 +121,11 @@
         },
         vLine: [],
         hLine: [],
-        showGrid: false,
-        elements: [
-          {id: 1, x: 0, y: 0, w: 200, h: 200, mw: 200, mh: 200, conflict: true, parent: true, debug: false, snap: false, text: 'Element 1', styles: { backgroundColor: 'rgb(239, 154, 154)' }},
-          {id: 2, x: 210, y: 200, w: 200, h: 200, mw: 200, mh: 200, conflict: false, parent: true, debug: false, snap: false, text: 'Element 2', styles: { backgroundColor: 'rgb(129, 212, 250)' }},
-          {id: 3, x: 420, y: 200, w: 200, h: 200, mw: 200, mh: 200, conflict: false, parent: true, debug: false, snap: false, text: 'Element 3', styles: { backgroundColor: 'rgb(174, 213, 129)' }}
-        ]
+        showGrid: false
       }
     },
     computed: {
+      ...mapGetters(['elements']),
       boxStyle () {
         const _t = this
         const boxStyle = {}
