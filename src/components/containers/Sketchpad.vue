@@ -44,8 +44,8 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-image: linear-gradient(90deg, #f4f4f4 1%, rgba(0, 0, 0, 0) 1%),
-        linear-gradient(#f4f4f4 1%, rgba(0, 0, 0, 0) 1%);
+        background-image: linear-gradient(90deg, #cecece 1%, rgba(0, 0, 0, 0) 1%),
+        linear-gradient(#cecece 1%, rgba(0, 0, 0, 0) 1%);
         background-size: 100px 100px;
       }
     }
@@ -70,46 +70,22 @@
       <div class="drag-grid" v-show="showGrid"></div>
       <div class="drag-large-grid" v-show="showGrid"></div>
        <vdr
-        :w="200"
-        :h="200"
-        :parent="true"
-        :debug="false"
-        :min-width="200"
-        :min-height="200"
-        :isConflictCheck="true"
-        :snap="true"
+        v-for="(ele, index) in elements"
+        :key="index"
+        :w="ele.w"
+        :h="ele.h"
+        :x="ele.x"
+        :y="ele.y"
+        :parent="ele.parent"
+        :debug="ele.debug"
+        :min-width="ele.mw"
+        :min-height="ele.mh"
+        :isConflictCheck="ele.conflict"
+        :snap="ele.snap"
         :grid="[10,10]"
         @refLineParams="getRefLineParams"
-        class="test1">
-      </vdr>
-      <vdr
-        :w="200"
-        :h="200"
-        :parent="true"
-        :x="200"
-        :debug="false"
-        :min-width="200"
-        :min-height="200"
-        :isConflictCheck="true"
-        :snap="true"
-        :grid="[10,10]"
-        @refLineParams="getRefLineParams"
-        class="test2">
-      </vdr>
+        :style="ele.styles">
 
-      <vdr
-        :w="200"
-        :h="200"
-        :parent="true"
-        :x="420"
-        :debug="false"
-        :min-width="200"
-        :min-height="200"
-        :isConflictCheck="true"
-        :snap="true"
-        :grid="[10,10]"
-        @refLineParams="getRefLineParams"
-        class="test3">
       </vdr>
 
        <!--辅助线-->
@@ -144,7 +120,12 @@
         },
         vLine: [],
         hLine: [],
-        showGrid: false
+        showGrid: false,
+        elements: [
+          {id: 1, x: 0, y: 0, w: 200, h: 200, mw: 200, mh: 200, conflict: true, parent: true, debug: false, snap: false, text: 'Element 1', styles: { backgroundColor: 'rgb(239, 154, 154)' }},
+          {id: 2, x: 210, y: 200, w: 200, h: 200, mw: 200, mh: 200, conflict: false, parent: true, debug: false, snap: false, text: 'Element 2', styles: { backgroundColor: 'rgb(129, 212, 250)' }},
+          {id: 3, x: 420, y: 200, w: 200, h: 200, mw: 200, mh: 200, conflict: false, parent: true, debug: false, snap: false, text: 'Element 3', styles: { backgroundColor: 'rgb(174, 213, 129)' }}
+        ]
       }
     },
     computed: {
