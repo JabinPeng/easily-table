@@ -62,7 +62,7 @@
       <div class="drag-large-grid" v-show="showGrid"></div>
        <vdr
         v-for="(ele, index) in elements"
-        :key="index"
+        :key="'ele_' + index"
         :w="ele.w"
         :h="ele.h"
         :x="ele.x"
@@ -79,7 +79,7 @@
         @resizing="onResize"
         @resizestop="onResizeStop"
         :style="ele.styles">
-         <component :is="ele.component" :key="index"></component>
+         <component :is="ele.component"></component>
       </vdr>
 
        <!--辅助线-->
@@ -154,8 +154,8 @@
       },
       ondblclickPad () {
         console.log(this)
-        const _t = this
-        _t.$bus.$emit('editor/pad/dblclick')
+        // const _t = this
+        // _t.$bus.$emit('editor/pad/dblclick')
       },
        // 辅助线回调事件
     getRefLineParams (params) {
