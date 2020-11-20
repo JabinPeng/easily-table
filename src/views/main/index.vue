@@ -31,9 +31,9 @@ export default {
         Sketchpad
     },
     created () {
-       const _t = this
+       // const _t = this
        this.$nextTick(this.init)
-       this.$bus.$on('editor/add/node', _t.doAddNode)
+       // this.$bus.$on('editor/add/node', _t.doAddNode)
     },
     methods: {
         init () {

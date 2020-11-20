@@ -53,15 +53,6 @@
       display: none;
     }
   }
-  .test1 {
-    background-color: rgb(239, 154, 154);
-  }
-  .test2{
-    background-color: rgb(129, 212, 250);
-  }
-  .test3{
-    background-color: rgb(174, 213, 129);
-  }
 </style>
 
 <template>
@@ -83,9 +74,12 @@
         :isConflictCheck="ele.conflict"
         :snap="ele.snap"
         :grid="[10,10]"
+        :z-index="ele.zIndex"
         @refLineParams="getRefLineParams"
+        @resizing="onResize"
+        @resizestop="onResizeStop"
         :style="ele.styles">
-
+         <component :is="ele.component" :key="index"></component>
       </vdr>
 
        <!--辅助线-->
@@ -110,6 +104,7 @@
 
 <script>
   import { mapGetters } from 'vuex'
+  import LineChart from "@comp/Material/Charts/LineChart";
   export default {
     name: 'Sketchpad',
     data () {
@@ -123,6 +118,9 @@
         hLine: [],
         showGrid: false
       }
+    },
+    components: {
+      LineChart
     },
     computed: {
       ...mapGetters(['elements']),
@@ -143,6 +141,13 @@
       }
     },
     methods: {
+      // vdr 操作函数
+      onResize (x, y, width, height) {
+        console.log(x, y, width, height)
+      },
+      onResizeStop (x, y, width, height) {
+        console.log(x, y, width, height)
+      },
       /** 网格 */
       setShowGrid () {
         this.showGrid = !this.showGrid

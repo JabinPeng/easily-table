@@ -24,6 +24,7 @@ module.exports = {
             .set('@$', resolve('src'))
             .set('@comp', resolve('src/components'))
             .set('@views', resolve('src/views'))
+            .set('@utils', resolve('src/utils'))
     },
     devServer: {
         // development server port 8000
