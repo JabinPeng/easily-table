@@ -28,6 +28,6 @@ npm run build
 ```
 npm run lint
 ```
-
-
-喜欢就给个star吧  ^_^
+目前还在施工中
+更新
+喜欢就给个star吧^ _ ^
