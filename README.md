@@ -23,11 +23,6 @@ npm start
 ```
 npm run build
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
 目前还在施工中 更新中++++++++++
 
 喜欢就给个star吧^ _ ^
