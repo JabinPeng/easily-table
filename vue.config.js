@@ -27,7 +27,6 @@ module.exports = {
             .set('@utils', resolve('src/utils'))
     },
     devServer: {
-        // development server port 8000
         port: 9099,
         open: true,
         // proxy: {
