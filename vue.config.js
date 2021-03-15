@@ -18,6 +18,8 @@ module.exports = {
   devServer: {
     port: 8688,
     open: true,
-    hot: true
+    proxy: {
+      '/api': { target: '127.0.0.1:8688' }
+    }
   }
 };

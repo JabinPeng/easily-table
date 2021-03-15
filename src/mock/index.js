@@ -1,6 +1,8 @@
-const Index = require('mockjs')
+const Mock = require('mockjs')
 
-Index.setup({
+require('./tableData')
+
+Mock.setup({
     timeout: 800 // setter delay time
 })
 console.log('mock success')

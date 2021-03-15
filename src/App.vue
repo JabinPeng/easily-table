@@ -14,7 +14,7 @@ export default {
     EasilyTable
   },
   mounted () {
-    httpAction('list', 'get').then((res) => {
+    httpAction('/list', 'get').then((res) => {
       console.log(res)
     })
   }
