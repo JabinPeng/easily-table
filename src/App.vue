@@ -1,15 +1,18 @@
 <template>
   <div id="app">
+    <EasilyTable></EasilyTable>
   </div>
 </template>
 
 <script>
+import EasilyTable from "./components/EasilyTable/Index";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
+    EasilyTable
   }
-}
+};
 </script>
 
 <style>
