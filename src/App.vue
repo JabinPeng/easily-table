@@ -6,11 +6,17 @@
 
 <script>
 import EasilyTable from "./components/EasilyTable/Index";
+import { httpAction } from "./mock/api";
 
 export default {
   name: "App",
   components: {
     EasilyTable
+  },
+  mounted () {
+    httpAction('list', 'get').then((res) => {
+      console.log(res)
+    })
   }
 };
 </script>
