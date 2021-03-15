@@ -7,4 +7,3 @@ export function httpAction (url, methods, parameter) {
         params: parameter
     })
 }
-

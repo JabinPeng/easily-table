@@ -2,8 +2,8 @@
   <div id="app">
     <EasilyTable
       :data-source="data"
+      :data-api-params="{}"
       :columns="columns"
-      :data-api="dataApi"
       :row-options="rowOptions"
       :page-options="pageOptions"
       :tags-filter="tagsFilter"
@@ -15,6 +15,7 @@
 <script>
 import EasilyTable from "./components/EasilyTable/Index";
 import { httpAction } from "./mock/api";
+import { getList } from "./mock/api/data";
 
 export default {
   name: "App",
@@ -23,8 +24,13 @@ export default {
   },
   data() {
     return {
-      dataApi: null,
-      data: [],
+      // data: getList,
+      data: params => {
+        return getList(params).then((res) => {
+          console.log(res)
+          return res.result
+        })
+      },
       tagsFilter: [
         {
           title: "库位名称",
@@ -110,13 +116,24 @@ export default {
           showTitle: true,
           type: "danger",
           refresh: true,
-          api: null,
           params: {
-            key: "key"
-          }
+            id: "id"
+          },
+          api: (params) => {
+            return httpAction('list/del', 'delete', { id: params.id }).then((res) => {
+              if (res.success) {
+                console.log('删除成功')
+              }
+            })
+          },
         }
       ],
       pageOptions: [
+        {
+          title: '刷新',
+          type: "primary",
+          icon: 'undo'
+        },
         {
           icon: "plus-circle",
           title: "添加",
@@ -160,12 +177,10 @@ export default {
   },
 
   mounted() {
-    httpAction("/list", "get", {
-      count: 100
-    }).then(res => {
-      console.log(res);
-      this.data = res.result;
-    });
+    /** 获取列表 **/
+    // getList({ total: 100 }).then((res) => {
+    //     this.data = res.result
+    // })
   }
 };
 </script>

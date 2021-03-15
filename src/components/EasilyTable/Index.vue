@@ -142,7 +142,8 @@ export default {
   components: { TableQueryFilter, CustomForm },
   props: {
     dataSource: {
-      type: Array,
+      type: [Array, Function],
+      required: true,
       default: () => []
     },
     // 排序
@@ -219,7 +220,7 @@ export default {
       tuggerVisible: false,
       factory: "",
       factories: ["1500", "1600"],
-      data: this.dataSource,
+      data: [],
       currLablInfo: {},
       filters: [],
       pageSizeOptions: ["10", "20", "50", "100"],
@@ -275,6 +276,7 @@ export default {
       }
     },
     dataSource: function(val) {
+      console.log(val)
       this.data = val;
     }
   },
@@ -501,7 +503,6 @@ export default {
     // 加载列表
     renderTableData() {
       const {
-        dataApi,
         filters,
         dataApiParams,
         paginationConfig,
@@ -509,29 +510,24 @@ export default {
         dataSource
       } = this;
 
-      this.data = dataSource;
-
-      if (!dataApi) return false;
-      const params = {
-        query: filters,
-        ...dataApiParams
-      };
-
-      const { current, pageSize } = paginationConfig;
-
-      if (pagination) {
-        params.page = current;
-        params.pageSize = pageSize;
+      if (dataSource instanceof Array) {
+        this.data = dataSource;
+        return
       }
-
-      dataApi({ ...params }).then(res => {
-        if (res.success || res.status) {
+      if (dataSource instanceof Function) {
+        let result = this.dataSource(Object.assign({
+          query: filters,
+          ...dataApiParams,
+        },pagination ? {
+          current: (paginationConfig && paginationConfig.current) || this.paginationConfig.current,
+          pageSize: (paginationConfig && paginationConfig.pageSize) || this.paginationConfig.pageSize,
+        } : {}
+      ))
+        result.then((res) => {
           this.data = res.data;
-          this.paginationConfig.total = res.length;
-        } else {
-          this.data = [];
-        }
-      });
+          this.paginationConfig.total = res.total;
+        })
+      }
     }
   }
 };
