@@ -17,6 +17,10 @@ import EasilyTable from "./components/EasilyTable/Index";
 import { httpAction } from "./mock/api";
 
 export default {
+  name: "App",
+  components: {
+    EasilyTable
+  },
   data() {
     return {
       dataApi: null,
@@ -47,7 +51,7 @@ export default {
         { title: "库位名称", dataIndex: "placeName", key: "placeName" },
         {
           title: "操作",
-          width: 150,
+          width: 200,
           dataIndex: "action",
           scopedSlots: { customRender: "action" }
         }
@@ -56,6 +60,7 @@ export default {
         {
           icon: "edit",
           title: "修改",
+          showTitle: true,
           showConfirm: false,
           showDailog: true,
           refresh: true,
@@ -95,7 +100,6 @@ export default {
             { key: "placeCode", dataIndex: "placeCode" },
             { key: "placeName", dataIndex: "placeName" }
           ],
-          showTitle: false,
           type: "primary",
           api: null
         },
@@ -103,7 +107,7 @@ export default {
           icon: "delete",
           title: "删除",
           showConfirm: true,
-          showTitle: false,
+          showTitle: true,
           type: "danger",
           refresh: true,
           api: null,
@@ -154,10 +158,7 @@ export default {
       ]
     };
   },
-  name: "App",
-  components: {
-    EasilyTable
-  },
+
   mounted() {
     httpAction("/list", "get", {
       count: 100
@@ -176,6 +177,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  padding: 20px;
 }
 </style>

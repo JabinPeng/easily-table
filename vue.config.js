@@ -4,11 +4,7 @@ module.exports = {
       less: {
         modifyVars: {
           // less vars，customize ant design theme
-          "primary-color": "#1F61AD",
-          // 'link-color': '#F5222D',
-          "border-radius-base": "2px",
-          "form-item-height": "50px",
-          "pad-button-height": "50px"
+          "primary-color": "#40a9ff"
         },
         // DO NOT REMOVE THIS LINE
         javascriptEnabled: true
@@ -19,7 +15,7 @@ module.exports = {
     port: 8688,
     open: true,
     proxy: {
-      '/api': { target: '127.0.0.1:8688' }
+      "/api": { target: "127.0.0.1:8688" }
     }
   }
 };

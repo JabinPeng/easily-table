@@ -548,7 +548,7 @@ export default {
   flex-wrap: wrap;
   margin-bottom: 1rem;
   .left {
-    flex: 1;
+    // flex: 1;
     margin-right: 10px;
   }
 }
