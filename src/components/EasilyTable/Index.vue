@@ -485,12 +485,15 @@ export default {
       !showDailog &&
         api &&
         api(_params).then(res => {
+            console.log(res)
           if (res.success) {
             // 接口调用成功函数
             callback && callback(res);
             this.$message.success(res.message);
             // 刷新页面
             refresh && this.renderTableData();
+          } else {
+              this.$message.error(res.message)
           }
         });
     },
@@ -525,8 +528,12 @@ export default {
         } : {}
       ))
         result.then((res) => {
-          this.data = res.data;
-          this.paginationConfig.total = res.total || 0;
+            if (res.success) {
+                this.data = res.result.data;
+                this.paginationConfig.total = res.result.total || 0;
+            } else {
+                this.$message.error(res.message)
+            }
         })
       }
     }

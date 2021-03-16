@@ -116,9 +116,7 @@ export default {
           },
           api: (params) => {
             return httpAction('list/del', 'delete', { id: params.id }).then((res) => {
-              if (res.success) {
-                console.log('删除成功')
-              }
+              return res
             })
           },
         }
@@ -175,8 +173,7 @@ export default {
     /** 获取列表 **/
     loadData (params) {
       return getList(params).then((res) => {
-        console.log(res)
-        return res.result
+          return res
       })
     }
   }

@@ -2,7 +2,7 @@ const responseBody = {
   message: "",
   timestamp: 0,
   result: null,
-  code: 0
+  success: true
 };
 
 export const builder = (data, message, success = true, headers = {}) => {
@@ -11,7 +11,7 @@ export const builder = (data, message, success = true, headers = {}) => {
     responseBody.message = message;
   }
   if (success !== undefined && success !== true) {
-    responseBody.code = success;
+    responseBody.success = success;
     responseBody._status = success;
   }
   if (
