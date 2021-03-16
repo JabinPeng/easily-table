@@ -297,6 +297,7 @@ export default {
     paginationChange(pagination, filters, sorter) {
       const { paginationConfig } = this;
       const { current, pageSize } = pagination;
+      console.log(typeof current, pageSize)
 
       // 过滤、排序改变不刷新数据，当前页、页码改变刷新数据
       if (
@@ -525,7 +526,7 @@ export default {
       ))
         result.then((res) => {
           this.data = res.data;
-          this.paginationConfig.total = res.total;
+          this.paginationConfig.total = res.total || 0;
         })
       }
     }

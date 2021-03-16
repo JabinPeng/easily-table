@@ -25,12 +25,7 @@ export default {
   data() {
     return {
       // data: getList,
-      data: params => {
-        return getList(params).then((res) => {
-          console.log(res)
-          return res.result
-        })
-      },
+      data: this.loadData,
       tagsFilter: [
         {
           title: "库位名称",
@@ -132,7 +127,8 @@ export default {
         {
           title: '刷新',
           type: "primary",
-          icon: 'undo'
+          icon: 'undo',
+          api: this.loadData
         },
         {
           icon: "plus-circle",
@@ -175,12 +171,14 @@ export default {
       ]
     };
   },
-
-  mounted() {
+  methods: {
     /** 获取列表 **/
-    // getList({ total: 100 }).then((res) => {
-    //     this.data = res.result
-    // })
+    loadData (params) {
+      return getList(params).then((res) => {
+        console.log(res)
+        return res.result
+      })
+    }
   }
 };
 </script>
