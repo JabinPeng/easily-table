@@ -1,4 +1,5 @@
 <template>
+  <a-locale-provider :locale="locale">
   <div id="app">
     <EasilyTable
       :data-source="data"
@@ -10,12 +11,14 @@
       :pagination="true"
     ></EasilyTable>
   </div>
+  </a-locale-provider>
 </template>
 
 <script>
+import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN';
 import EasilyTable from "./components/EasilyTable/Index";
-import { httpAction } from "./mock/api";
-import { getList } from "./mock/api/data";
+// import { httpAction } from "./mock/api";
+import { getList, addList, editList, delList } from "./mock/api/data";
 
 export default {
   name: "App",
@@ -24,7 +27,7 @@ export default {
   },
   data() {
     return {
-      // data: getList,
+      locale: zhCN,
       data: this.loadData,
       tagsFilter: [
         {
@@ -102,7 +105,19 @@ export default {
             { key: "placeName", dataIndex: "placeName" }
           ],
           type: "primary",
-          api: null
+          params: {
+            id: 'id',
+            warehouse_name: 'warehouse_name',
+            warehouse_Num: 'warehouse_Num',
+            factoryNum: 'factoryNum',
+            warehouseType: 'warehouseType',
+            placeCode: 'placeCode',
+            placeName: 'placeName'
+          },
+          before(form){  // 点击确认接口调用前
+            console.log(form)
+          },
+          api: editList
         },
         {
           icon: "delete",
@@ -114,11 +129,12 @@ export default {
           params: {
             id: "id"
           },
-          api: (params) => {
-            return httpAction('list/del', 'delete', { id: params.id }).then((res) => {
-              return res
-            })
-          },
+          // api: (params) => {
+          //   return httpAction('list/del', 'delete', { id: params.id }).then((res) => {
+          //     return res
+          //   })
+          // },
+          api: delList
         }
       ],
       pageOptions: [
@@ -136,9 +152,11 @@ export default {
           showTitle: false,
           type: "primary",
           refresh: true,
+          justify: 'space-between',
+          colSpan: 24,
           // 表单展示数据
           formFields: [
-            { key: "warehouse_name", dataIndex: "warehouse_name" },
+            { key: "warehouse_name", dataIndex: "warehouse_name", labelCol: 6, wrapperCol: 18 },
             { key: "warehouse_Num", dataIndex: "warehouse_Num" },
             {
               key: "factoryNum",
@@ -164,7 +182,15 @@ export default {
             { key: "placeCode", dataIndex: "placeCode" },
             { key: "placeName", dataIndex: "placeName" }
           ],
-          api: null
+          params: {
+            warehouse_name: 'warehouse_name',
+            warehouse_Num: 'warehouse_Num',
+            factoryNum: 'factoryNum',
+            warehouseType: 'warehouseType',
+            placeCode: 'placeCode',
+            placeName: 'placeName'
+          },
+          api: addList
         }
       ]
     };
@@ -173,8 +199,20 @@ export default {
     /** 获取列表 **/
     loadData (params) {
       return getList(params).then((res) => {
-          return res
+        if (res.success) {
+          return res.result
+        } else {
+          this.$message.error(res.message)
+        }
       })
+    },
+    /** 新增 **/
+    handleAdd (params) {
+        return addList(params).then((res) => res)
+    },
+    /** 修改 **/
+    handleEdit (params) {
+        return editList(params).then((res) => res)
     }
   }
 };

@@ -41,11 +41,16 @@ const delData = options => {
 const addData = options => {
   const queryParameters = getQueryParameters(options);
   console.log("queryParameters", queryParameters);
-
+  list.unshift(Object.assign(queryParameters, {id: Mock.Random.id()}))
+  return builder(null, '添加成功', true);
 }
 const editData = options => {
   const queryParameters = getQueryParameters(options);
   console.log("queryParameters", queryParameters);
+  let editData = list.find((v) => (v.id =  queryParameters.id))
+  editData = { ...queryParameters, id: queryParameters.id }
+  console.log(editData)
+  return builder(null, '修改成功', true);
 
 }
 Mock.mock(/\/api\/list/, "get", data);

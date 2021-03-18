@@ -1,13 +1,13 @@
 <template>
   <a-modal v-model="visible" :title="title" centered :footer="null">
     <a-form layout="horizontal" label-align="left">
-      <a-row type="flex" justify="space-between" class="login-form">
-        <a-col span="24" v-for="(item, index) in fields" :key="index">
+      <a-row type="flex" :justify="justify" class="login-form">
+        <a-col :span="colSpan" v-for="(item, index) in fields" :key="index">
           <!-- has-feedback -->
           <a-form-item
             :label="item.label"
-            :label-col="{ span: 8 }"
-            :wrapper-col="{ span: 16 }"
+            :label-col="{ span: item.labelCol ? item.labelCol: 8 }"
+            :wrapper-col="{ span: item.wrapperCol ? item.wrapperCol : 16 }"
             :validate-status="item.status"
             :help="item.message"
           >
@@ -123,6 +123,14 @@ export default {
     value: {
       type: Boolean,
       default: false
+    },
+    justify: {
+      type: String,
+      default: 'space-between'
+    },
+    colSpan: {
+      type: Number,
+      default: 24
     },
     fields: {
       type: Array,

@@ -119,6 +119,7 @@
     <!-- 弹窗 -->
     <CustomForm
       :fields="currentForm"
+      :rules="rules"
       @confirm="okHandle"
       v-model="visible"
       :title="title"
@@ -216,6 +217,7 @@ export default {
       fields: {},
       currentForm: [],
       currentFormConfig: null,
+      rules: {},
       visible: false,
       tuggerVisible: false,
       factory: "",
@@ -267,7 +269,6 @@ export default {
       };
     }
   },
-  created() {},
   watch: {
     visible: function(val) {
       if (!val) {
@@ -276,7 +277,6 @@ export default {
       }
     },
     dataSource: function(val) {
-      console.log(val)
       this.data = val;
     }
   },
@@ -322,7 +322,8 @@ export default {
         });
     },
     // 弹窗确定
-    okHandle(record) {
+    async okHandle(record) {
+      console.log(record)
       const {
         api,
         params,
@@ -331,10 +332,11 @@ export default {
         beforeRequest
       } = this.currentFormConfig;
 
-      let _params = {};
+      let _params = record;
+      console.log(this.record)
       if (params) {
         Object.keys(params).map(key => {
-          _params[key] = record[params[key]];
+          _params[key] = record[params[key]] ? record[params[key]] : this.record[params[key]];
         });
       } else {
         _params = record;
@@ -353,7 +355,7 @@ export default {
           return false;
         }
       }
-
+      console.log(_params)
       api &&
         api(_params).then(res => {
           if (res.success) {
@@ -384,8 +386,7 @@ export default {
         beforeRequest,
         before
       } = config;
-
-      // 点击后 调用前接口前
+      // 点击后 调用接口前
       if (before) {
         if (hasAsyncFunction(before)) {
           await before(record, formFields);
@@ -457,7 +458,6 @@ export default {
             this.currentForm.push(item);
           }
         });
-
         return false;
       }
 
@@ -480,12 +480,11 @@ export default {
         );
         _params = res || _params;
       }
-
+      console.log(record)
       // 调用接口
       !showDailog &&
         api &&
         api(_params).then(res => {
-            console.log(res)
           if (res.success) {
             // 接口调用成功函数
             callback && callback(res);
@@ -528,12 +527,8 @@ export default {
         } : {}
       ))
         result.then((res) => {
-            if (res.success) {
-                this.data = res.result.data;
-                this.paginationConfig.total = res.result.total || 0;
-            } else {
-                this.$message.error(res.message)
-            }
+            this.data = res.data;
+            this.paginationConfig.total = res.total || 0;
         })
       }
     }
