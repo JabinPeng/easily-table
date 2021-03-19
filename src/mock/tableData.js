@@ -47,9 +47,10 @@ const addData = options => {
 const editData = options => {
   const queryParameters = getQueryParameters(options);
   console.log("queryParameters", queryParameters);
-  let editData = list.find((v) => (v.id =  queryParameters.id))
-  editData = { ...queryParameters, id: queryParameters.id }
-  console.log(editData)
+  let editData = list.find((v) => (v.id === queryParameters.id))
+  Object.keys(queryParameters).forEach((key) => {
+    editData[key] = queryParameters[key]
+  })
   return builder(null, '修改成功', true);
 
 }

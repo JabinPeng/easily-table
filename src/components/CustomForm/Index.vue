@@ -1,8 +1,22 @@
 <template>
-  <a-modal v-model="visible" :title="title" centered :footer="null">
+  <a-modal v-model="visible"
+           :title="title"
+           centered
+           :bodyStyle="modalConfig.bodyStyle"
+           :cancelText="modalConfig.cancelText"
+           :okText="modalConfig.okText"
+           :okType="modalConfig.okType"
+           :keyboard="modalConfig.keyboard"
+           :mask="modalConfig.mask"
+           :maskClosable="modalConfig.maskClosable"
+           :width="modalConfig.width"
+           :afterClose="modalConfig.afterClose"
+           @ok="okHandle"
+           @cancel="visible = false"
+    >
     <a-form layout="horizontal" label-align="left">
-      <a-row type="flex" :justify="justify" class="login-form">
-        <a-col :span="colSpan" v-for="(item, index) in fields" :key="index">
+      <a-row type="flex" :justify="formConfig.justify" class="login-form" :gutter="formConfig.gutter">
+        <a-col :span="formConfig.colSpan" v-for="(item, index) in fields" :key="index">
           <!-- has-feedback -->
           <a-form-item
             :label="item.label"
@@ -90,23 +104,6 @@
             />
           </a-form-item>
         </a-col>
-
-        <a-col span="24">
-          <div
-            style="text-align:right;width:100%;border-top:1px solid #E8E8E8; padding:15px 0;margin-top:15px;"
-          >
-            <a-button
-              type="default"
-              style="margin-right:15px"
-              @click="visible = false"
-            >
-              取消
-            </a-button>
-            <a-button @click="okHandle" type="primary">
-              确定
-            </a-button>
-          </div>
-        </a-col>
       </a-row>
     </a-form>
   </a-modal>
@@ -124,14 +121,32 @@ export default {
       type: Boolean,
       default: false
     },
-    justify: {
-      type: String,
-      default: 'space-between'
+    formConfig: {
+      type: Object,
+      default: () => {
+          return {
+              justify: 'space-bettew',
+              colSpan: 24,
+              gutter: 24
+          }
+      }
     },
-    colSpan: {
-      type: Number,
-      default: 24
-    },
+      modalConfig: {
+          type: Object,
+          default: () => {
+              return {
+                  width: 600,
+                  bodyStyle: {},
+                  cancelText: '取消',
+                  okText: '确定',
+                  okType: 'primary',
+                  keyboard: true,
+                  mask: true,
+                  maskClosable: true,
+                  afterClose: () => {}
+              }
+          }
+      },
     fields: {
       type: Array,
       default: () => []
