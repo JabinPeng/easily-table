@@ -119,7 +119,7 @@
     <!-- 弹窗 -->
     <CustomForm
       :fields="currentForm"
-      :rules="rules"
+      :formConfig="formConfig"
       @confirm="okHandle"
       v-model="visible"
       :title="title"
@@ -215,6 +215,8 @@ export default {
       buttonIndex: null,
       customRenders: [],
       fields: {},
+      formConfig: {},
+      modalConfig: {},
       currentForm: [],
       currentFormConfig: null,
       rules: {},
@@ -322,8 +324,7 @@ export default {
         });
     },
     // 弹窗确定
-    async okHandle(record) {
-      console.log(record)
+    okHandle(record) {
       const {
         api,
         params,
@@ -331,9 +332,8 @@ export default {
         callback,
         beforeRequest
       } = this.currentFormConfig;
-
+      console.log(this.currentFormConfig)
       let _params = record;
-      console.log(this.record)
       if (params) {
         Object.keys(params).map(key => {
           _params[key] = record[params[key]] ? record[params[key]] : this.record[params[key]];
@@ -355,7 +355,6 @@ export default {
           return false;
         }
       }
-      console.log(_params)
       api &&
         api(_params).then(res => {
           if (res.success) {
@@ -375,12 +374,13 @@ export default {
 
       this.currentFormConfig = clonedeep(config);
       this.currentForm = [];
-
       const {
         api,
         params,
         refresh,
         formFields,
+        formConfig,
+        modalConfig,
         showDailog,
         callback,
         beforeRequest,
@@ -394,9 +394,20 @@ export default {
           before(record, formFields);
         }
       }
-
       // 有弹窗
       if (showDailog && formFields) {
+        this.formConfig = JSON.stringify(formConfig) === '{}' ? { justify: 'space-bettew', colSpan: 24 } : formConfig
+        this.modalConfig = JSON.stringify(modalConfig) === '{}' ? {
+          width: 600,
+          bodyStyle: {},
+          cancelText: '取消',
+          okText: '确定',
+          okType: 'primary',
+          keyboard: true,
+          mask: true,
+          maskClosable: true,
+          afterClose: () => {}
+        } : formConfig
         this.visible = true;
         this.record = record;
         this.rowIndex = rowIndex;
@@ -480,7 +491,6 @@ export default {
         );
         _params = res || _params;
       }
-      console.log(record)
       // 调用接口
       !showDailog &&
         api &&
