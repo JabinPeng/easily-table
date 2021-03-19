@@ -69,7 +69,7 @@
                         showDailog: true,
                         refresh: true,
                         formConfig: {
-                            justify: 'flex-start',
+                            justify: 'start',
                             colSpan: 12,
                             gutter: 24
                         },
@@ -159,7 +159,19 @@
                         modalConfig: {},
                         // 表单展示数据
                         formFields: [
-                            {key: "warehouse_name", dataIndex: "warehouse_name", labelCol: 6, wrapperCol: 18},
+                            {
+                                key: "warehouse_name",
+                                dataIndex: "warehouse_name",
+                                labelCol: 6,
+                                wrapperCol: 18,
+                                validateStatus: '',
+                                hasFeedback: false,
+                                help: '',
+                                rules: [
+                                    {required: true, message: '不能为空'},
+                                    {pattern: /^[0-9]*$/ ,message: '必须为整数'}
+                                    ]
+                            },
                             {key: "warehouse_Num", dataIndex: "warehouse_Num", labelCol: 6, wrapperCol: 18},
                             {
                                 key: "factoryNum",

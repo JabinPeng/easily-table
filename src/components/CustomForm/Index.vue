@@ -24,6 +24,7 @@
             :wrapper-col="{ span: item.wrapperCol ? item.wrapperCol : 16 }"
             :validate-status="item.status"
             :help="item.message"
+            :has-feedback="item.hasFeedback"
           >
             <!-- 输入框 -->
             <a-input
@@ -31,6 +32,7 @@
               :disabled="item.disabled"
               @change="changeHandler(index, form[index].key, form[index].value)"
               :placeholder="item.placeholder"
+              @blur="blurHandler(index, form[index].key, form[index].value, item.rules, item)"
               v-if="item.type === undefined || item.type === 'input'"
             />
 
@@ -179,6 +181,34 @@ export default {
     // 数据变化
     changeHandler(index, key, value) {
       this.$emit("change", index, key, value, this.form);
+    },
+    blurHandler(index, key, value, rules, item) {
+      console.log(index, key, value, rules, item)
+      let {callback} = item
+      if (rules instanceof Array) {
+        for(var i = 0; i < rules.length; i++) {
+          if (rules[i]["required"] && value === '' || value === undefined) {
+            console.log('空的')
+            this.$set(this.fields[index], 'validateStatus', 'error')
+            this.$set(this.fields[index], 'hasFeedback', true)
+            this.$set(this.fields[index], 'help', rules[i].message)
+            return
+          }
+          if (!rules[i].pattern) continue
+          if (!(rules[i].pattern.test(value))) {
+            this.$set(item, 'validateStatus', 'error')
+            this.$set(item, 'hasFeedback', true)
+            this.$set(item, 'help', rules[i].message)
+            return
+          }
+        }
+      }
+      this.$set(item, 'validateStatus', '')
+      this.$set(item, 'hasFeedback', false)
+      this.$set(item, 'help', '')
+      // 完成验证callback
+      console.log(item)
+      callback && callback(index, key, value, rules, item)
     },
     // 确定
     okHandle: function() {

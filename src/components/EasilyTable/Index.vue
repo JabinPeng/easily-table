@@ -396,7 +396,7 @@ export default {
       }
       // 有弹窗
       if (showDailog && formFields) {
-        this.formConfig = JSON.stringify(formConfig) === '{}' ? { justify: 'space-bettew', colSpan: 24 } : formConfig
+        this.formConfig = JSON.stringify(formConfig) === '{}' ? { justify: 'space-between', colSpan: 24 } : formConfig
         this.modalConfig = JSON.stringify(modalConfig) === '{}' ? {
           width: 600,
           bodyStyle: {},
@@ -491,6 +491,7 @@ export default {
         );
         _params = res || _params;
       }
+      console.log(this.currentForm)
       // 调用接口
       !showDailog &&
         api &&
