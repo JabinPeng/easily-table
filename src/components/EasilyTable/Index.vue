@@ -491,7 +491,6 @@ export default {
         );
         _params = res || _params;
       }
-      console.log(this.currentForm)
       // 调用接口
       !showDailog &&
         api &&

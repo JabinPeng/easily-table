@@ -194,7 +194,6 @@ export default {
             this.$set(this.fields[index], 'help', rules[i].message)
             return
           }
-          if (!rules[i].pattern) continue
           if (!(rules[i].pattern.test(value))) {
             this.$set(item, 'validateStatus', 'error')
             this.$set(item, 'hasFeedback', true)
