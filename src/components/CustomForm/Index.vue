@@ -22,8 +22,8 @@
             :label="item.label"
             :label-col="{ span: item.labelCol ? item.labelCol: 8 }"
             :wrapper-col="{ span: item.wrapperCol ? item.wrapperCol : 16 }"
-            :validate-status="item.status"
-            :help="item.message"
+            :validate-status="item.validateStatus"
+            :help="item.help"
             :has-feedback="item.hasFeedback"
           >
             <!-- 输入框 -->
@@ -184,29 +184,28 @@ export default {
     },
     blurHandler(index, key, value, rules, item) {
       console.log(index, key, value, rules, item)
+      const _ = this
       let {callback} = item
       if (rules instanceof Array) {
         for(var i = 0; i < rules.length; i++) {
           if (rules[i]["required"] && value === '' || value === undefined) {
-            console.log('空的')
-            this.$set(this.fields[index], 'validateStatus', 'error')
-            this.$set(this.fields[index], 'hasFeedback', true)
-            this.$set(this.fields[index], 'help', rules[i].message)
+            _.$set(_.fields[index], 'validateStatus', 'error')
+            _.$set(_.fields[index], 'hasFeedback', true)
+            _.$set(_.fields[index], 'help', rules[i].message)
             return
           }
-          if (!(rules[i].pattern.test(value))) {
-            this.$set(item, 'validateStatus', 'error')
-            this.$set(item, 'hasFeedback', true)
-            this.$set(item, 'help', rules[i].message)
+          if (rules[i].pattern && !(rules[i].pattern.test(value))) {
+            _.$set(item, 'validateStatus', 'warning')
+            _.$set(item, 'hasFeedback', true)
+            _.$set(item, 'help', rules[i].message)
             return
           }
         }
       }
-      this.$set(item, 'validateStatus', '')
-      this.$set(item, 'hasFeedback', false)
+      this.$set(_.fields[index], 'validateStatus', 'success')
+      this.$set(item, 'hasFeedback', true)
       this.$set(item, 'help', '')
       // 完成验证callback
-      console.log(item)
       callback && callback(index, key, value, rules, item)
     },
     // 确定

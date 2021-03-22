@@ -170,7 +170,10 @@
                                 rules: [
                                     {required: true, message: '不能为空'},
                                     {pattern: /^[0-9]*$/ ,message: '必须为整数'}
-                                    ]
+                                    ],
+                                callback: function () {
+
+                                }
                             },
                             {key: "warehouse_Num", dataIndex: "warehouse_Num", labelCol: 6, wrapperCol: 18},
                             {
